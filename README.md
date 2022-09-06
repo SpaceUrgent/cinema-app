@@ -41,4 +41,4 @@ After login as user add movie sessions to shopping cart and create orders to pur
 4) After configuring all stated before you can simply test the functionallity in Main class using psvm.
 
 ### Model structure 
-![pic](Cinema_chart.png)
+![pic](Cinema_relations.png)
