@@ -30,7 +30,7 @@ After login as user add movie sessions to shopping cart and create orders to pur
 
 1) Clone the project to your machine 
 2) Download MySQL and MySQL Workbench
-3) In src/main/resources/hibernate.cfg.xml insert properties:
+3) In src/main/resources/hibernate.cfg.xml delete plugs and insert appropriate properties:
 - hibernate.dialect &rarr; hibernate dialect (ex. "org.hibernate.dialect.MySQL8Dialect");
 - connection.url &rarr; url of schema in MySQL database;
 - connection.driver_class &rarr; (ex. com.mysql.cj.jdbc.Driver);
@@ -38,7 +38,7 @@ After login as user add movie sessions to shopping cart and create orders to pur
 - connection.password &rarr; password according to DB settings;
 - show_sql &rarr; true to see queries executed by hibernate in console;
 - hbm2ddl.auto &rarr; hibernate strategy of shema generation (recommended: "create-drop")
-4) After configuring all stated before you can simply test the functionallity in Main class using psvm.
+4) After configuring all stated before you can create class Main and simply test the functionallity using psvm.
 
 ### Model structure 
 ![pic](Cinema_relations.png)
