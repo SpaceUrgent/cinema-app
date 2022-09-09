@@ -1,48 +1,32 @@
 package org.cinema.dao.impl;
 
 import java.util.Optional;
+import org.cinema.dao.AbstractDao;
 import org.cinema.dao.UserDao;
 import org.cinema.exception.DataProcessingException;
-import org.cinema.lib.Dao;
 import org.cinema.model.User;
-import org.cinema.util.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
-@Dao
-public class UserDaoImpl implements UserDao {
-    @Override
-    public User add(User user) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            session.save(user);
-            transaction.commit();
-            return user;
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("Can't insert a user: " + user, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
+@Repository
+public class UserDaoImpl extends AbstractDao<User> implements UserDao {
+    public UserDaoImpl(SessionFactory factory) {
+        super(factory, User.class);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<User> query = session.createQuery("FROM User u "
-                    + "WHERE u.email = :email", User.class);
-            query.setParameter("email", email);
-            return query.uniqueResultOptional();
+        try (Session session = factory.openSession()) {
+            Query<User> findByEmail = session.createQuery(
+                    "FROM User u "
+                            + "INNER JOIN FETCH u.roles "
+                            + "WHERE email = :email", User.class);
+            findByEmail.setParameter("email", email);
+            return findByEmail.uniqueResultOptional();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't find a user by email: " + email, e);
+            throw new DataProcessingException("User with email " + email + " not found", e);
         }
     }
 }
