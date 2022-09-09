@@ -5,7 +5,7 @@ import org.cinema.model.Order;
 import org.cinema.model.User;
 
 public interface OrderDao {
-    Order create(Order order);
+    Order add(Order order);
 
-    List<Order> getByUser(User user);
+    List<Order> getOrdersHistory(User user);
 }

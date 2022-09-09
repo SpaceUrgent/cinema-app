@@ -2,22 +2,33 @@ package org.cinema.service.impl;
 
 import java.util.Optional;
 import org.cinema.dao.UserDao;
-import org.cinema.lib.Inject;
-import org.cinema.lib.Service;
 import org.cinema.model.User;
 import org.cinema.service.UserService;
-import org.cinema.util.HashUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Inject
-    private UserDao userDao;
+    private final PasswordEncoder encoder;
+    private final UserDao userDao;
+
+    @Autowired
+    public UserServiceImpl(PasswordEncoder encoder, UserDao userDao) {
+        this.encoder = encoder;
+        this.userDao = userDao;
+    }
 
     @Override
     public User add(User user) {
-        user.setSalt(HashUtil.getSalt());
-        user.setPassword(HashUtil.hashPassword(user.getPassword(), user.getSalt()));
+        user.setPassword(encoder.encode(user.getPassword()));
         return userDao.add(user);
+    }
+
+    @Override
+    public User get(Long id) {
+        return userDao.get(id).orElseThrow(
+                () -> new RuntimeException("User with id " + id + " not found"));
     }
 
     @Override
