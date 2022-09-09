@@ -7,6 +7,18 @@ After login as user add movie sessions to shopping cart and create orders to pur
 <sub>(to familiarize with detailed entities relations, please, refer to chart below)
 </sub>
 
+# Technologies used:
+
+- Java 11
+- Spring (Context, Web, Security)
+- Servlet
+- Jackson
+- Tomcat
+- MySQL
+- Hibernate
+- HQL
+- Maven
+
 # Application functionality
 
 - registration 
@@ -37,18 +49,6 @@ After login as user add movie sessions to shopping cart and create orders to pur
 | /orders/complete  | POST | Complete order based on shopping cart | USER    | n/a |
 | /orders  | GET | Show orders history | USER    | n/a |
 | /users/by-email?email={email} | GET | Find user by email | ADMIN    | RequestParam {email} = String: email |
-
-# Technologies used:
-
-- Java 11
-- Spring (Context, Web, Security)
-- Servlet
-- Jackson
-- Tomcat
-- MySQL
-- Hibernate
-- HQL
-- Maven
 
 # To install the app:
 
