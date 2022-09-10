@@ -1,6 +1,8 @@
 # Cinema-app
 
-Web application example that supports authentication, registration and CRUD operations.
+Web application that supports authentication, registration and CRUD operations.<br />
+Application designed for the cinema/cinema network to provide administration staff possibility to manage the cinema schedule and movie program in role of ADMIN. 
+However, cinema customers registered as USER have access to get actual information about current movie, purchase tickets for movie sessions sa well as review the order history using online paltform. <br />
 Manage cinema by adding new movies, movie sessions, adding cinema halls.
 With registering new user the shopping cart linked to user will be created. 
 After login as user add movie sessions to shopping cart and create orders to purchase tickets. <br />
@@ -10,8 +12,7 @@ After login as user add movie sessions to shopping cart and create orders to pur
 # Technologies used:
 
 - Java 11
-- Spring (Context, Web, Security)
-- Servlet
+- Spring (Core, MVC, Security)
 - Jackson
 - Tomcat
 - MySQL
@@ -60,8 +61,6 @@ After login as user add movie sessions to shopping cart and create orders to pur
 - db.driver &rarr; (ex. com.mysql.cj.jdbc.Driver);
 - db.username &rarr; username according to DB settings;
 - db.password &rarr; password according to DB settings;
-- hibernate.show_sql &rarr; true to see queries executed by hibernate in console;
-- hibernate.hbm2ddl.auto &rarr; hibernate strategy of shema generation (recommended: "create-drop")
 4) Configure Apache Tomcat: 
 > Add/edit configuration &rarr;
 > Add new &rarr;
